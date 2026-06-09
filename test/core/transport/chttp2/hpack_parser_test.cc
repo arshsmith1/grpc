@@ -853,8 +853,9 @@ class MockMitigationEngine : public MitigationEngine {
     return std::nullopt;
   }
 
-  std::optional<Action> EvaluateIncomingMetadata(absl::string_view key,
-                                                 absl::string_view) override {
+  std::optional<Action> EvaluateIncomingMetadata(
+      absl::string_view key, absl::string_view,
+      absl::string_view /*peer_address*/) override {
     if (behavior_ == Behavior::kRejectRpc && key == "custom-key") {
       return Action::kRejectRpc;
     }
@@ -862,7 +863,7 @@ class MockMitigationEngine : public MitigationEngine {
   }
 
   std::optional<Action> EvaluateAllIncomingMetadata(
-      const grpc_metadata_batch&) override {
+      const grpc_metadata_batch&, absl::string_view /*peer_address*/) override {
     if (behavior_ == Behavior::kCloseConnection) {
       return Action::kCloseConnection;
     }

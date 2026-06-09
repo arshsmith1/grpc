@@ -3485,6 +3485,7 @@ grpc_cc_library(
     external_deps = [
         "absl/functional:any_invocable",
         "absl/strings",
+        "absl/time",
     ],
     deps = [
         "arena",

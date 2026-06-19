@@ -78,6 +78,7 @@ class ServerCall final : public Call, public DualRefCounted<ServerCall> {
       parent_ctx->arena = std::move(parent_arena);
       arena()->SetContext<ParentCallContext>(parent_ctx);
     }
+    ProcessIncomingInitialMetadata(*client_initial_metadata_stored_);
     SourceConstructed();
   }
 
